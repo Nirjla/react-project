@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import clear_icon from "../WeatherIcons/clear.png";
-import cloud_icon from "../WeatherIcons/cloud.png";
-import drizzle_icon from "../WeatherIcons/drizzle.png";
-import rain_icon from "../WeatherIcons/rain.png";
-import snow_icon from "../WeatherIcons/snow.png";
-import wind_icon from "../WeatherIcons/wind.png";
-import humidity_icon from "../WeatherIcons/humidity.png";
+import clear_icon from "../Assets/WeatherIcons/clear.png";
+import cloud_icon from "../Assets/WeatherIcons/cloud.png";
+import drizzle_icon from "../Assets/WeatherIcons/drizzle.png";
+import rain_icon from "../Assets/WeatherIcons/rain.png";
+import snow_icon from "../Assets/WeatherIcons/snow.png";
+import wind_icon from "../Assets/WeatherIcons/wind.png";
+import humidity_icon from "../Assets/WeatherIcons/humidity.png";
 import axios from "axios";
 
 const WeatherApp = () => {
@@ -61,25 +61,6 @@ const WeatherApp = () => {
             break;
           default:
             console.log("No icon has been found");
-        }
-        if (iconCode === "01d" || iconCode === "01n") {
-          setWicon(clear_icon);
-        } else if (iconCode === "02d" || iconCode === "02n") {
-          setWicon(cloud_icon);
-        } else if (iconCode === "03d" || iconCode === "03n") {
-          setWicon(drizzle_icon);
-        } else if (iconCode === "04d" || iconCode === "04n") {
-          setWicon(cloud_icon);
-        } else if (iconCode === "09d" || iconCode === "09n") {
-          setWicon(rain_icon);
-        } else if (iconCode === "10d" || iconCode === "10n") {
-          setWicon(rain_icon);
-        } else if (iconCode === "11d" || iconCode === "11n") {
-          setWicon(rain_icon);
-        } else if (iconCode === "13d" || iconCode === "13n") {
-          setWicon(snow_icon);
-        } else {
-          setWicon(wind_icon);
         }
         // set the retrieved data
         setWeatherData(responseData);
