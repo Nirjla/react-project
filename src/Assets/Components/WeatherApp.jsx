@@ -1,32 +1,67 @@
 import React, { useEffect, useState } from "react";
-import clear_icon from "../clear.png";
-import cloud_icon from "../cloud.png";
-import drizzle_icon from "../drizzle.png";
-import rain_icon from "../rain.png";
-import snow_icon from "../snow.png";
-import wind_icon from "../wind.png";
-import humidity_icon from "../humidity.png";
+import clear_icon from "../WeatherIcons/clear.png";
+import cloud_icon from "../WeatherIcons/cloud.png";
+import drizzle_icon from "../WeatherIcons/drizzle.png";
+import rain_icon from "../WeatherIcons/rain.png";
+import snow_icon from "../WeatherIcons/snow.png";
+import wind_icon from "../WeatherIcons/wind.png";
+import humidity_icon from "../WeatherIcons/humidity.png";
 import axios from "axios";
 
 const WeatherApp = () => {
-  const api_key = "0f0a0134bb28d6effaff6babe75f8172";
+  const api_key = process.env.REACT_APP_API_KEY;
   const [search, setSearch] = useState("");
   const [wicon, setWicon] = useState("clear_icon");
   const [weatherData, setWeatherData] = useState("");
   useEffect(() => {
     const fetchApi = async () => {
-      try { 
+      try {
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=Metric&appid=${api_key}`;
         // sends a GET request to specified URL and stores in response in form of json
         const response = await axios.get(url);
         console.log(response);
-        //responseData holds the response data returned by the server 
+        //responseData holds the response data returned by the server
         const responseData = await response.data;
         // console.log(responseData);
         // holds the icon data
         const iconCode = responseData.weather[0].icon;
         // console.log(iconCode);
-
+        switch (iconCode) {
+          case "01d":
+          case "01n":
+            setWicon(clear_icon);
+            break;
+          case "02d":
+          case "02n":
+            setWicon(cloud_icon);
+            break;
+          case "03d":
+          case "03n":
+            setWicon(drizzle_icon);
+            break;
+          case "04d":
+          case "04n":
+            setWicon(cloud_icon);
+            break;
+          case "09d":
+          case "09n":
+            setWicon(rain_icon);
+            break;
+          case "10d":
+          case "10n":
+            setWicon(rain_icon);
+            break;
+          case "11d":
+          case "11n":
+            setWicon(snow_icon);
+            break;
+          case "13d":
+          case "13n":
+            setWicon(snow_icon);
+            break;
+          default:
+            console.log("No icon has been found");
+        }
         if (iconCode === "01d" || iconCode === "01n") {
           setWicon(clear_icon);
         } else if (iconCode === "02d" || iconCode === "02n") {
